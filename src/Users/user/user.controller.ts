@@ -9,7 +9,7 @@ export class UserController {
     }
     @Post()
     Create(@Body() params: userModel):void{
-        console.log("El nombre es "+ params.name + "\n El correo es "+ params.email+
-        "\n el número es "+ params.name);
+        console.log("名前： "+ params.name + "\n メール： "+ params.email+
+        "\n 電話番号： "+ params.telefono);
     }
 }
