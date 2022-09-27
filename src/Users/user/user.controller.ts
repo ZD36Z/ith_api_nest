@@ -10,9 +10,9 @@ export class UserController {
     }
     @Post()
     Create(@Body() params: Users):void{
-        console.log("名前： "+ params.name + "\n メール： "+ params.email+
+        console.log("名前： "+ params.nombre + "\n メール： "+ params.correo+
         "\n 電話番号： "+ params.telefono);
+        //Cambiar el nombre de la clase a User, que empiece con mayuscula, definir a los parametros como interface y no como clase
+        //No es necesario que el nombre de la clase o interface lleve el nombre de model
     }
 }
-//Cambiar el nombre de la clase a User, que empiece con mayuscula, definir a los parametros como interface y no como clase
-//No es necesario que el nombre de la clase o interface lleve el nombre de model
