@@ -1,18 +1,36 @@
-import { Body, Controller, Post } from '@nestjs/common';
+import { Body, Controller, Post, Get, Param } from '@nestjs/common';
+import { get } from 'http';
 import { stringify } from 'querystring';
 import { userModel } from 'src/Models/user.model';
 import { Users } from 'src/Models/Users';
+import { UserService } from './user.service';
 
 @Controller('user')
 export class UserController {
-    constructor(){
+    constructor(private userService: UserService){
 
     }
     @Post()
     Create(@Body() params: Users):void{
-        console.log("名前： "+ params.nombre + "\n メール： "+ params.correo+
-        "\n 電話番号： "+ params.telefono);
-        //Cambiar el nombre de la clase a User, que empiece con mayuscula, definir a los parametros como interface y no como clase
-        //No es necesario que el nombre de la clase o interface lleve el nombre de model
+        this.userService.create(params);
+        
+    }
+
+    @Get('/all')
+    getUsers(): Users[]{
+        return this.userService.getAll()
+
+    }
+    
+    @Get('/:correo')
+    getUser(@Param('correo') param) : Users{
+        return this.userService.getByCorreo(param)
+    }
+    validar(request: Users){
+        if(request!= undefined){
+            return request
+        }else{
+            console.log("El usuario no existe")
+        }
     }
 }
