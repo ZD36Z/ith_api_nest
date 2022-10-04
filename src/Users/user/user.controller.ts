@@ -23,14 +23,11 @@ export class UserController {
     }
     
     @Get('/:correo')
-    getUser(@Param('correo') param) : Users{
-        return this.userService.getByCorreo(param)
-    }
-    validar(request: Users){
-        if(request!= undefined){
-            return request
-        }else{
-            console.log("El usuario no existe")
-        }
+    getUser(@Param('correo') param) : Users | string{
+
+        const user = this.userService.getByCorreo(param)
+        //return user ? user : "El usuario no existe"
+        return user ?? "El usuario no existe"
+        
     }
 }
