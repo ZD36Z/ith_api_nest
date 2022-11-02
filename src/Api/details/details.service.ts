@@ -6,6 +6,9 @@ import { Repository } from 'typeorm';
 
 @Injectable()
 export class DetailsService{
+
+    manager: any;
+    
     constructor (@InjectRepository(Details) private detailsEntity : Repository <Details>){
     }
     async crear_detalle(id_sales : number, detalles : IDetails[]){

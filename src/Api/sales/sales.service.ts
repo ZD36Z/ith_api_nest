@@ -27,7 +27,12 @@ export class SalesService {
                 total
             })
 
-            //Se registra el detalle
-            await this.detailsService.crear_detalle(response.id, sale.details)
+            //Se registra el detalle (Rollback(?))
+            await this.detailsService.manager.crear_detalle(async (transactionalEntityManager) => {
+                await transactionalEntityManager.save(response.id,sale.details)
+                
+                
+            })
+            //await this.detailsService.crear_detalle(response.id, sale.details)
         }
 }
